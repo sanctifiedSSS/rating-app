@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div class="container">
+        <div class="row">
+
+            <div class="col">
+            </div>
+
+            <div class="col">
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Tag</th>
+                        <th scope="col">Page</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {% for title in titles %}
+                        <tr>
+                            <td>{{ title.name }}</td>
+                            <td>{{ title.year }}</td>
+                            <td>{{ title.tag }}</td>
+                            <td><a href="{{ path('show_title', {'id': title.id}) }}">GO</a></td>
+                        </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="col">
+            </div>
+
+        </div>
+    </div>
+{% endblock %}
