@@ -19,7 +19,7 @@ class TitleType extends AbstractType
     {
         $builder
             ->add('name', TextType::class)
-            ->add('tag', ChoiceType::class, [
+            ->add('category', ChoiceType::class, [
                 'choices' => [
                     'Film' => 'Film',
                     'Game' => 'Game',

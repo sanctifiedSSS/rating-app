@@ -42,7 +42,7 @@ class TitleController extends AbstractController
                         $newFilename
                     );
                 } catch (FileException $e) {
-                    // TODO: create some exception
+                    //
                 }
 
                 $title->setCoverFilename($newFilename);

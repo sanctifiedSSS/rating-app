@@ -43,7 +43,7 @@ class Title
      * @Assert\NotBlank
      * @var
      */
-    private $tag;
+    private $category;
 
     /**
      * @Assert\NotBlank
@@ -92,14 +92,14 @@ class Title
         return $this;
     }
 
-    public function getTag(): ?string
+    public function getCategory(): ?string
     {
-        return $this->tag;
+        return $this->category;
     }
 
-    public function setTag(string $tag): self
+    public function setCategory(string $category): self
     {
-        $this->tag = $tag;
+        $this->category = $category;
 
         return $this;
     }
