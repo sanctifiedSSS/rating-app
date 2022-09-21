@@ -2,6 +2,7 @@
 
 namespace App\Type;
 
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\AbstractType;
@@ -14,7 +15,7 @@ class UserType extends AbstractType
     {
         $builder
             ->add('email', EmailType::class)
-            ->add('password', TextType::class)
+            ->add('password', PasswordType::class)
             ->add('sign up', SubmitType::class);
     }
 }

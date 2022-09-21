@@ -1,26 +1,7 @@
 {% extends 'base.html.twig' %}
 
 {% block body %}
-
-    <div class="header">
-        {% block header %}
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th><a href="{{ path('home') }}"><img src="" alt=" "></a></th>
-                        <th><a href="">Films</a></th>
-                        <th><a href="">Games</a></th>
-                        <th><a href="">TV series</a></th>
-                        <th><a href="">Anime</a></th>
-                        <th>
-                            <button onclick="location.href='{{ path('app_login') }}'" type="button">Log in</button>
-                            <button onclick="location.href='{{ path('app_signup') }}'" type="button">Sign up</button>
-                        </th>
-                    </tr>
-                </thead>
-            </table>
-        {% endblock %}
-    </div>
+    {{ parent() }}
 
     <div class="container">
         <div class="row">
@@ -31,23 +12,23 @@
                 <table class="table">
 
                     <thead>
-                        <tr>
-                            <th scope="col">Name</th>
-                            <th scope="col">Year</th>
-                            <th scope="col">Category</th>
-                            <th scope="col">Page</th>
-                        </tr>
+                    <tr>
+                        <th scope="col">Name</th>
+                        <th scope="col">Year</th>
+                        <th scope="col">Category</th>
+                        <th scope="col">Page</th>
+                    </tr>
                     </thead>
 
                     <tbody>
-                        {% for title in titles %}
-                            <tr>
-                                <td>{{ title.name }}</td>
-                                <td>{{ title.year }}</td>
-                                <td>{{ title.category }}</td>
-                                <td><a href="{{ path('show_title', {'id': title.id}) }}">GO</a></td>
-                            </tr>
-                        {% endfor %}
+                    {% for title in titles %}
+                        <tr>
+                            <td>{{ title.name }}</td>
+                            <td>{{ title.year }}</td>
+                            <td>{{ title.category }}</td>
+                            <td><a href="{{ path('show_title', {'id': title.id}) }}">GO</a></td>
+                        </tr>
+                    {% endfor %}
                     </tbody>
 
                 </table>

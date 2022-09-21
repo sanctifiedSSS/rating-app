@@ -51,6 +51,11 @@ class Title
      */
     private $year;
 
+    /**
+     * @ORM\Column(type="float", nullable=true)
+     */
+    private $score;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +118,17 @@ class Title
     public function setYear($year): void
     {
         $this->year = $year;
+    }
+
+    public function getScore(): ?float
+    {
+        return $this->score;
+    }
+
+    public function setScore(?float $score): self
+    {
+        $this->score = $score;
+
+        return $this;
     }
 }

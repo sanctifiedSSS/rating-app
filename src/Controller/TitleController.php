@@ -3,6 +3,7 @@
 namespace App\Controller;
 
 use App\Entity\Title;
+use App\Entity\User;
 use App\Type\TitleType;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\File\Exception\FileException;
@@ -10,7 +11,6 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
-
 
 class TitleController extends AbstractController
 {
@@ -70,6 +70,8 @@ class TitleController extends AbstractController
      */
     public function showTitle(int $id): Response
     {
+        $this->countScore($id);
+
         $title = $this->getDoctrine()->getManager()->find(Title::class, $id);
 
         if ($title === null) {
@@ -79,6 +81,30 @@ class TitleController extends AbstractController
         return $this->render("title/title.html.twig", [
             'title' => $title
         ]);
+    }
+
+    public function countScore($id)
+    {
+        $users = $this->getDoctrine()->getManager()->getRepository(User::class)->findAll();
+
+        $userCounter = 0.0;
+        $totalScore = 0.0;
+
+        foreach ($users as $user){
+            $ratedTitles = $user->getRatedTitles();
+            foreach ($ratedTitles as $key => $value){
+                if ($key === $id){
+                    $userCounter++;
+                    $totalScore += $value;
+                }
+            }
+        }
+
+        $title = $this->getDoctrine()->getManager()->find(Title::class, $id);
+        $title->setScore(round($totalScore / $userCounter, 2));
+
+        $this->getDoctrine()->getManager()->persist($title);
+        $this->getDoctrine()->getManager()->flush();
     }
 
 }

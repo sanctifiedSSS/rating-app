@@ -15,7 +15,7 @@ class HomeController extends AbstractController
      * @param Request $request
      * @return Response
      */
-    public function goHome(Request $request) : Response
+    public function home(Request $request) : Response
     {
         $titles = $this->getDoctrine()
             ->getManager()
@@ -25,5 +25,23 @@ class HomeController extends AbstractController
         return $this->render("home.html.twig", [
             'titles' => $titles
         ]);
+    }
+
+    /**
+     * @Route("/{category}", name="category")
+     * @param $category
+     * @return Response
+     */
+    public function showByCategory($category): Response
+    {
+        $titles = $this->getDoctrine()
+            ->getManager()
+            ->getRepository(Title::class)
+            ->findBy(['category' => $category]);
+
+        return $this->render("home.html.twig", [
+            'titles' => $titles
+        ]);
+
     }
 }

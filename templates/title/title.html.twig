@@ -1,39 +1,48 @@
 {% extends 'base.html.twig' %}
 
-{% block body %}
+{% block head %}
 
-    <div class="header">
-        {% block header %}
-            <table class="table">
-                <thead>
-                <tr>
-                    <th><a href="{{ path('home') }}"><img src="" alt=" "></a></th>
-                    <th><a href="">Films</a></th>
-                    <th><a href="">Games</a></th>
-                    <th><a href="">TV series</a></th>
-                    <th><a href="">Anime</a></th>
-                    <th>
-                        <button onclick="location.href='{{ path('app_login') }}'" type="button">Log in</button>
-                        <button onclick="location.href='{{ path('app_signup') }}'" type="button">Sign up</button>
-                    </th>
-                </tr>
-                </thead>
-            </table>
-        {% endblock %}
-    </div>
+    {% block title %}
+        {{ title.name }}
+    {% endblock %}
+
+    {% block stylesheets %}
+        {{ parent() }}
+        <link rel="stylesheet" href="{{ asset('styles/main.css') }}">
+    {% endblock %}
+
+{% endblock %}
+
+{% block body %}
+    {{ parent() }}
 
     <div class="container">
         <div class="row">
 
-            <div class="col"></div>
+            <div class="col">
+                <img src="{{ asset('uploads/covers/' ~ title.coverFilename) }}" alt="Cover">
+            </div>
 
             <div class="col">
                 <h1>{{ title.name }} ({{ title.year }})</h1>
-                <img src="{{ asset('uploads/covers/' ~ title.coverFilename) }}" alt="Cover">
                 <div>{{ title.description }}</div>
             </div>
 
-            <div class="col"></div>
+            <div class="col">
+                <div class="rate" >
+                    <input type="radio" id="star5" name="rate" value="5" onclick="location.href='{{ path('rate_title', {'id': title.id, 'score': 5}) }}'" />
+                    <label for="star5" title="text">5 stars</label>
+                    <input type="radio" id="star4" name="rate" value="4" onclick="location.href='{{ path('rate_title', {'id': title.id, 'score': 4}) }}'" />
+                    <label for="star4" title="text">4 stars</label>
+                    <input type="radio" id="star3" name="rate" value="3" onclick="location.href='{{ path('rate_title', {'id': title.id, 'score': 3}) }}'" />
+                    <label for="star3" title="text">3 stars</label>
+                    <input type="radio" id="star2" name="rate" value="2" onclick="location.href='{{ path('rate_title', {'id': title.id, 'score': 2}) }}'" />
+                    <label for="star2" title="text">2 stars</label>
+                    <input type="radio" id="star1" name="rate" value="1" onclick="location.href='{{ path('rate_title', {'id': title.id, 'score': 1}) }}'" />
+                    <label for="star1" title="text">1 star</label>
+                    <div>Avg. rating: {{title.score}}</div>
+                </div>
+            </div>
 
         </div>
     </div>
